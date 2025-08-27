@@ -1,6 +1,6 @@
 <script>
     import {page} from "$app/state";
-    import {getDepartmentDetails, getDepartmentUpdate} from "$lib/api/DepartmentApi.js";
+    import {departmentGet, departmentPatch} from "$lib/api/DepartmentApi.js";
     import {alertError, alertSuccess} from "$lib/alert.js";
     import {onMount} from "svelte";
 
@@ -10,7 +10,7 @@
     });
 
     async function getDepartment() {
-        const response = await getDepartmentDetails(id);
+        const response = await departmentGet(id);
         const responseBody = await response.json();
 
         if (responseBody.statusCode === 200) {
@@ -23,7 +23,7 @@
     async function departmentUpdate(e) {
         e.preventDefault();
 
-        const response = await getDepartmentUpdate(id, department);
+        const response = await departmentPatch(id, department);
         const responseBody = await response.json();
 
         if (responseBody.statusCode === 200) {

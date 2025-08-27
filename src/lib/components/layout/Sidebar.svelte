@@ -3,7 +3,8 @@
         { name: "Dashboard", icon: "📊", href: "/" },
         { name: "Users", icon: "👥", href: "#" },
         { name: "Settings", icon: "⚙️", href: "#" },
-        { name: "Department", icon: "👥", href: "/department" }
+        { name: "Department", icon: "👥", href: "/department" },
+        { name: "Student", icon: "👥", href: "/student" }
     ];
 </script>
 

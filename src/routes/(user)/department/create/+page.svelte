@@ -1,5 +1,5 @@
 <script>
-    import {getDepartmentCreate} from "$lib/api/DepartmentApi.js";
+    import {departmentPost} from "$lib/api/DepartmentApi.js";
     import {alertError, alertSuccess} from "$lib/alert.js";
     import {goto} from "$app/navigation";
 
@@ -10,7 +10,7 @@
     async function departmentCreate(e) {
         e.preventDefault();
 
-        const response = await getDepartmentCreate(department);
+        const response = await departmentPost(department);
         const responseBody = await response.json();
 
         if (responseBody.statusCode === 200) {
@@ -22,7 +22,7 @@
     }
 </script>
 <section class="p-6 bg-white rounded-2xl shadow-md mx-auto">
-    <h2 class="text-2xl font-bold mb-6 text-gray-700">Department Detail</h2>
+    <h2 class="text-2xl font-bold mb-6 text-gray-700">Department Add</h2>
 
     <form onsubmit={departmentCreate}>
         <div>

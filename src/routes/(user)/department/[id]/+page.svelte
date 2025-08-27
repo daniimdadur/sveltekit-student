@@ -1,10 +1,9 @@
 <script>
-    import {getDepartmentDetails} from "$lib/api/DepartmentApi.js";
+    import {departmentGet} from "$lib/api/DepartmentApi.js";
     import {alertError} from "$lib/alert.js";
     import {page} from "$app/state";
     import {onMount} from "svelte";
 
-    let number = $state(1);
     const {id} = page.params;
     const department = $state({
         id: id,
@@ -29,7 +28,7 @@
     ]);
 
     async function departmentDetail() {
-        const response = await getDepartmentDetails(id);
+        const response = await departmentGet(id);
         const responseBody = await response.json();
 
         if (responseBody.statusCode === 200) {
@@ -69,7 +68,7 @@
                     readonly
             />
         </div>
-        {#if lecturers}
+        {#if students && students.length > 0}
             <h2 class="text-2xl font-bold">Student List</h2>
             <div class="overflow-x-auto bg-white rounded-2xl shadow">
                 <table class="min-w-full border-collapse">
@@ -107,6 +106,8 @@
                     </tbody>
                 </table>
             </div>
+        {/if}
+        {#if lecturers && lecturers.length > 0}
             <h2 class="text-2xl font-bold">Lecturer List</h2>
             <div class="overflow-x-auto bg-white rounded-2xl shadow">
                 <table class="min-w-full border-collapse">

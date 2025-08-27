@@ -1,6 +1,6 @@
 import {PUBLIC_STUDENT_API} from "$env/static/public";
 
-export const getDepartmentList = async () => {
+export const departmentGetList = async () => {
     return await fetch(`${PUBLIC_STUDENT_API}/department`, {
         method: 'GET',
         headers: {
@@ -9,7 +9,7 @@ export const getDepartmentList = async () => {
     });
 }
 
-export const getDepartmentDetails = async (id) => {
+export const departmentGet = async (id) => {
     return await fetch(`${PUBLIC_STUDENT_API}/department/${id}`, {
         method: 'GET',
         headers: {
@@ -18,7 +18,7 @@ export const getDepartmentDetails = async (id) => {
     });
 }
 
-export const getDepartmentCreate = async ({name}) => {
+export const departmentPost = async ({name}) => {
     return await fetch(`${PUBLIC_STUDENT_API}/department`, {
         method: 'POST',
         headers: {
@@ -31,7 +31,7 @@ export const getDepartmentCreate = async ({name}) => {
     });
 }
 
-export const getDepartmentUpdate = async (id, {name}) => {
+export const departmentPatch = async (id, {name}) => {
     return await fetch(`${PUBLIC_STUDENT_API}/department/${id}`, {
         method: 'PATCH',
         headers: {
@@ -44,7 +44,7 @@ export const getDepartmentUpdate = async (id, {name}) => {
     });
 }
 
-export const getDepartmentDelete = async (id) => {
+export const departmentDelete = async (id) => {
     return await fetch(`${PUBLIC_STUDENT_API}/department/${id}`, {
         method: 'DELETE',
         headers: {
