@@ -1,15 +1,15 @@
 <script>
     import {page} from "$app/state";
-    import {studentGet, studentPatch} from "$lib/api/StudentApi.js";
     import {alertError, alertSuccess} from "$lib/alert.js";
-    import {goto} from "$app/navigation";
     import {departmentGetList} from "$lib/api/DepartmentApi.js";
     import {onMount} from "svelte";
+    import {lecturerGet, lecturerPatch} from "$lib/api/LecturerApi.js";
 
     const {id} = page.params;
-    let student = $state({
+    let lecturer = $state({
         name: '',
         email: '',
+        title: '',
         departmentId: '',
         departmentName: ''
     });
@@ -21,26 +21,25 @@
         }
     ]);
 
-    async function studentUpdate(e) {
+    async function lecturerUpdate(e) {
         e.preventDefault();
 
-        const response = await studentPatch(id, student);
+        const response = await lecturerPatch(id, lecturer);
         const responseBody = await response.json();
 
         if (responseBody.statusCode === 200) {
-            await alertSuccess('update student successfully');
-            await goto('/student');
+            await alertSuccess();
         } else {
             await alertError(responseBody.message);
         }
     }
 
-    async function studentDetail() {
-        const response = await studentGet(id);
+    async function lecturerDetail() {
+        const response = await lecturerGet(id);
         const responseBody = await response.json();
 
         if (responseBody.statusCode === 200) {
-            student = responseBody.data;
+            lecturer = responseBody.data;
         } else {
             await alertError(responseBody.message);
         }
@@ -59,19 +58,19 @@
 
     onMount(async () => {
         await departmentList();
-        await studentDetail();
+        await lecturerDetail();
     });
 </script>
 <section class="p-6 bg-white rounded-2xl shadow-md mx-auto">
-    <h2 class="text-2xl font-bold mb-6 text-gray-700">Student Edit</h2>
+    <h2 class="text-2xl font-bold mb-6 text-gray-700">Lecturer Edit</h2>
 
-    <form onsubmit={studentUpdate}>
+    <form onsubmit={lecturerUpdate}>
         <div class="mb-4">
             <label for="name" class="block text-sm font-medium text-gray-600">Name</label>
             <input
                     id="name"
                     type="text"
-                    bind:value={student.name}
+                    bind:value={lecturer.name}
                     class="w-full mt-1 px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
         </div>
@@ -80,7 +79,16 @@
             <input
                     id="name"
                     type="email"
-                    bind:value={student.email}
+                    bind:value={lecturer.email}
+                    class="w-full mt-1 px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+        </div>
+        <div class="mb-4">
+            <label for="name" class="block text-sm font-medium text-gray-600">Email</label>
+            <input
+                    id="name"
+                    type="text"
+                    bind:value={lecturer.title}
                     class="w-full mt-1 px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
         </div>
@@ -88,13 +96,13 @@
             <label for="department" class="block text-sm font-medium text-gray-600">Department</label>
             <select
                     id="department"
-                    bind:value={student.departmentId}
+                    bind:value={lecturer.departmentId}
                     class="w-full mt-1 px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                     required
             >
                 <option value="" disabled>Select Department</option>
                 {#each departments as department}
-                    <option value={department.id} selected={department.id === student.departmentId}>
+                    <option value={department.id} selected={department.id === lecturer.departmentId}>
                         {department.name}
                     </option>
                 {/each}
@@ -103,10 +111,10 @@
         <div class="flex justify-end gap-3 mt-4">
             <button type="submit"
                     class="bg-yellow-400 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg">
-                <i class="fas fa-plus-circle mr-2"></i>Save
+                <i class="fas fa-plus-circle mr-2"></i>Save Changes
             </button>
             <a class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg"
-               href="/student">
+               href="/lecturer">
                 Back
             </a>
         </div>

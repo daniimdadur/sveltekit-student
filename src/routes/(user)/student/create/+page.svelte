@@ -64,7 +64,7 @@
             <label for="name" class="block text-sm font-medium text-gray-600">Email</label>
             <input
                     id="name"
-                    type="text"
+                    type="email"
                     bind:value={student.email}
                     class="w-full mt-1 px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
