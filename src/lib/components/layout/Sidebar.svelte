@@ -5,7 +5,8 @@
         { name: "Settings", icon: "⚙️", href: "#" },
         { name: "Department", icon: "👥", href: "/department" },
         { name: "Student", icon: "👥", href: "/student" },
-        { name: "Lecturer", icon: "👥", href: "/lecturer" }
+        { name: "Lecturer", icon: "👥", href: "/lecturer" },
+        { name: "Course", icon: "👥", href: "/course" }
     ];
 </script>
 
